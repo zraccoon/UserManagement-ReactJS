@@ -43,12 +43,12 @@ class Home extends React.Component {
     this.props.onUnload();
   }
 
+  // style="background: %PUBLIC_URL%/english.jpeg"
+  
   render() {
     return (
-      <div className="home-page">
-        <div className="container page">
-          <div className="row">
-          </div>
+      <div className="container page">
+        <div>
         </div>
         <Footer copyRight={this.props.copyRight} />
       </div>
