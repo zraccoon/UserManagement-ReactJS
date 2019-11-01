@@ -1,5 +1,7 @@
 import { Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
+import Footer from './Footer'
+import { MDBContainer, MDBRow, MDBCol, MDBBtn, MDBInput } from 'mdbreact';
 import React from 'react';
 import agent from '../agent';
 import { connect } from 'react-redux';
@@ -9,7 +11,10 @@ import {
   LOGIN_PAGE_UNLOADED
 } from '../constants/actionTypes';
 
-const mapStateToProps = state => ({ ...state.auth });
+const mapStateToProps = state => ({
+   ...state.auth,
+   copyRight: state.common.copyRight
+});
 
 const mapDispatchToProps = dispatch => ({
   onChangeEmail: value =>
@@ -42,53 +47,50 @@ class Login extends React.Component {
     const password = this.props.password;
     return (
       <div className="auth-page">
-        <div className="container page">
-          <div className="row">
-
-            <div className="col-md-6 offset-md-3 col-xs-12">
-              <h1 className="text-xs-center">Sign In</h1>
+        <MDBContainer className="pt-5">
+          <MDBRow>
+            <MDBCol md='3'/>
+            <MDBCol md='6' >
+            <form onSubmit={this.submitForm(email, password)}>
+              <p className="h5 text-center mb-4">Sign in</p>
               <p className="text-xs-center">
                 <Link to="/register">
                   Need an account?
                 </Link>
               </p>
-
               <ListErrors errors={this.props.errors} />
-
-              <form onSubmit={this.submitForm(email, password)}>
-                <fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="email"
-                      placeholder="Email"
-                      value={email}
-                      onChange={this.changeEmail} />
-                  </fieldset>
-
-                  <fieldset className="form-group">
-                    <input
-                      className="form-control form-control-lg"
-                      type="password"
-                      placeholder="Password"
-                      value={password}
-                      onChange={this.changePassword} />
-                  </fieldset>
-
-                  <button
-                    className="btn btn-lg btn-primary pull-xs-right"
-                    type="submit"
-                    disabled={this.props.inProgress}>
-                    Sign in
-                  </button>
-
-                </fieldset>
-              </form>
-            </div>
-
-          </div>
-        </div>
+              <div className="grey-text">
+                <MDBInput
+                  label="Your name"
+                  icon="user"
+                  group
+                  type="text"                  
+                  validate
+                  error="wrong"
+                  success="right"
+                  value={email}
+                  onChange={this.changeEmail}
+                />
+                <MDBInput
+                  label="Your password"
+                  icon="lock"
+                  group
+                  type="password"
+                  validate
+                  value={password}
+                  onChange={this.changePassword}
+                />
+              </div>
+              <div className="text-center">
+                <MDBBtn color="primary" type="submit"
+                    disabled={this.props.inProgress}>Login</MDBBtn>
+              </div>
+            </form>
+            </MDBCol>
+            <MDBCol md='3'/>
+          </MDBRow>
+        </MDBContainer>
+        <Footer copyRight={this.props.copyRight} />
       </div>
     );
   }

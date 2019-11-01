@@ -1,7 +1,8 @@
-import Banner from './Banner';
-import MainView from './MainView';
 import React from 'react';
-import Tags from './Tags';
+// import Banner from './Banner';
+// import MainView from './MainView';
+// import Tags from './Tags';
+import Footer from '../Footer'
 import agent from '../../agent';
 import { connect } from 'react-redux';
 import {
@@ -15,6 +16,7 @@ const Promise = global.Promise;
 const mapStateToProps = state => ({
   ...state.home,
   appName: state.common.appName,
+  copyRight: state.common.copyRight,
   token: state.common.token
 });
 
@@ -44,27 +46,11 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home-page">
-
-        <Banner token={this.props.token} appName={this.props.appName} />
-
         <div className="container page">
           <div className="row">
-            <MainView />
-
-            <div className="col-md-3">
-              <div className="sidebar">
-
-                <p>Popular Tags</p>
-
-                <Tags
-                  tags={this.props.tags}
-                  onClickTag={this.props.onClickTag} />
-
-              </div>
-            </div>
           </div>
         </div>
-
+        <Footer copyRight={this.props.copyRight} />
       </div>
     );
   }
