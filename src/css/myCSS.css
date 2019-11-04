@@ -1,0 +1,10 @@
+.myIcon {
+    width: 100px;
+    height: 100px;
+}
+
+.imageCenter {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
