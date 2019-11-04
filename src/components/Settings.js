@@ -36,6 +36,15 @@ class SettingsForm extends React.Component {
 
       this.props.onSubmitForm(user);
     };
+
+    this.handleImageClick = () => {
+      var imgUrl = prompt("Please enter your image URL.", this.state.image);
+      if (imgUrl != null) {
+        this.setState(Object.assign(this.state, {
+          image: imgUrl || '',
+        }));
+      }
+    }
   }
 
   componentWillMount() {
@@ -62,64 +71,78 @@ class SettingsForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.submitForm}>
-        <fieldset>
+      <div className="container-fluid">
+        <div className="row">
+          <div class="col-xl-12 col-lg-12 col-md-12">
+            <form onSubmit={this.submitForm}>
+              <img src={this.state.image} className="user-img myIcon imageCenter" alt={this.state.username} onClick={this.handleImageClick}/>
+              
+                {/* <fieldset className="form-group">
+                  <input
+                    className="form-control"
+                    type="text"
+                    placeholder="URL of profile picture"
+                    value={this.state.image}
+                    onChange={this.updateState('image')} />
+                </fieldset> */}
 
-          <fieldset className="form-group">
-            <input
-              className="form-control"
-              type="text"
-              placeholder="URL of profile picture"
-              value={this.state.image}
-              onChange={this.updateState('image')} />
-          </fieldset>
+                <div className="form-group">
+                  <label for="userName">Username:</label>
+                  <input
+                    id="userName"
+                    className="form-control form-control-lg"
+                    type="text"
+                    placeholder="Username"
+                    value={this.state.username}
+                    onChange={this.updateState('username')} />
+                </div>
 
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="text"
-              placeholder="Username"
-              value={this.state.username}
-              onChange={this.updateState('username')} />
-          </fieldset>
 
-          <fieldset className="form-group">
-            <textarea
-              className="form-control form-control-lg"
-              rows="8"
-              placeholder="Short bio about you"
-              value={this.state.bio}
-              onChange={this.updateState('bio')}>
-            </textarea>
-          </fieldset>
+                <div className="form-group">
+                  <label for="bio">Bio:</label>
+                  <textarea
+                    id="bio"
+                    className="form-control form-control-lg"
+                    rows="8"
+                    placeholder="Short bio about you"
+                    value={this.state.bio}
+                    onChange={this.updateState('bio')}>
+                  </textarea>
+                </div>
 
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="email"
-              placeholder="Email"
-              value={this.state.email}
-              onChange={this.updateState('email')} />
-          </fieldset>
+                <div className="form-group">
+                  <label for="email">Email:</label>
+                  <input
+                    id="email"
+                    className="form-control form-control-lg"
+                    type="email"
+                    placeholder="Email"
+                    value={this.state.email}
+                    onChange={this.updateState('email')} />
+                </div>
 
-          <fieldset className="form-group">
-            <input
-              className="form-control form-control-lg"
-              type="password"
-              placeholder="New Password"
-              value={this.state.password}
-              onChange={this.updateState('password')} />
-          </fieldset>
+                <div className="form-group">
+                  <label for="password">Password:</label>
+                  <input
+                    id="password"
+                    className="form-control form-control-lg"
+                    type="password"
+                    placeholder="New Password"
+                    value={this.state.password}
+                    onChange={this.updateState('password')} />
+                </div>
 
-          <button
-            className="btn btn-lg btn-primary pull-xs-right"
-            type="submit"
-            disabled={this.state.inProgress}>
-            Update Settings
-          </button>
-
-        </fieldset>
-      </form>
+                <button
+                  className="btn btn-lg btn-primary pull-xs-right"
+                  type="submit"
+                  disabled={this.state.inProgress}>
+                  Update Settings
+                </button>
+            </form>
+          </div> 
+        </div>
+      </div>
+      
     );
   }
 }
@@ -154,11 +177,11 @@ class Settings extends React.Component {
 
               <hr />
 
-              <button
+              {/* <button
                 className="btn btn-outline-danger"
                 onClick={this.props.onClickLogout}>
                 Or click here to logout.
-              </button>
+              </button> */}
 
             </div>
           </div>
