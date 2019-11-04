@@ -1,6 +1,7 @@
 import React from 'react';
 //import { Link } from 'react-router-dom';
-import {Nav, Navbar} from 'react-bootstrap'
+import {Nav, Navbar, NavDropdown} from 'react-bootstrap'
+import BellIcon from 'react-bell-icon';
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
@@ -23,8 +24,15 @@ const LoggedInView = props => {
         <Nav.Link href="/">Listen</Nav.Link>
         <Nav.Link href="/">Idiom</Nav.Link>
         <Nav.Link href="/">Article</Nav.Link>
-        <Nav.Link href={`/@${props.currentUser.username}`}><img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} />
-        {props.currentUser.username}</Nav.Link>
+        
+        <Nav.Link href="#"><img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} /></Nav.Link>
+        <NavDropdown title={props.currentUser.username} id="collasible-nav-dropdown">
+          <NavDropdown.Item href={`/@${props.currentUser.username}`}>view profile</NavDropdown.Item>
+          <NavDropdown.Divider />
+          <NavDropdown.Item href="#action/3.4">Sign out</NavDropdown.Item>
+        </NavDropdown>
+        {/* <Nav.Link href="#"><BellIcon width='20' active={true} animate={true} color='#fff'/></Nav.Link> */}
+        {/* <Nav.Link href={`/@${props.currentUser.username}`}><img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} /> */}
       </Nav>
     );
   }
