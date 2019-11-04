@@ -1,30 +1,15 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
+import {Nav, Navbar} from 'react-bootstrap'
 
 const LoggedOutView = props => {
   if (!props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
-
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/login" className="nav-link">
-            Sign in
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/register" className="nav-link">
-            Sign up
-          </Link>
-        </li>
-
-      </ul>
+      <Nav>
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/login">Sign in</Nav.Link>
+        <Nav.Link href="/register">Sing up</Nav.Link>
+      </Nav>
     );
   }
   return null;
@@ -33,36 +18,14 @@ const LoggedOutView = props => {
 const LoggedInView = props => {
   if (props.currentUser) {
     return (
-      <ul className="nav navbar-nav pull-xs-right">
-
-        <li className="nav-item">
-          <Link to="/" className="nav-link">
-            Home
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/editor" className="nav-link">
-            <i className="ion-compose"></i>&nbsp;New Post
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link to="/settings" className="nav-link">
-            <i className="ion-gear-a"></i>&nbsp;Settings
-          </Link>
-        </li>
-
-        <li className="nav-item">
-          <Link
-            to={`/@${props.currentUser.username}`}
-            className="nav-link">
-            <img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} />
-            {props.currentUser.username}
-          </Link>
-        </li>
-
-      </ul>
+      <Nav>
+        <Nav.Link href="/">Home</Nav.Link>
+        <Nav.Link href="/">Listen</Nav.Link>
+        <Nav.Link href="/">Idiom</Nav.Link>
+        <Nav.Link href="/">Article</Nav.Link>
+        <Nav.Link href={`/@${props.currentUser.username}`}><img src={props.currentUser.image} className="user-pic" alt={props.currentUser.username} />
+        {props.currentUser.username}</Nav.Link>
+      </Nav>
     );
   }
 
@@ -72,18 +35,14 @@ const LoggedInView = props => {
 class Header extends React.Component {
   render() {
     return (
-      <nav className="navbar navbar-light">
-        <div className="container">
-
-          <Link to="/" className="navbar-brand">
-            {this.props.appName.toLowerCase()}
-          </Link>
-
+      <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+        <Navbar.Brand href="/">{this.props.appName}</Navbar.Brand>
+        <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+        <Navbar.Collapse id="responsive-navbar-nav" className="justify-content-end">
           <LoggedOutView currentUser={this.props.currentUser} />
-
           <LoggedInView currentUser={this.props.currentUser} />
-        </div>
-      </nav>
+        </Navbar.Collapse>
+      </Navbar>
     );
   }
 }

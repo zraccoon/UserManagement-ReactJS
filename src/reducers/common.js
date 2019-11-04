@@ -18,7 +18,8 @@ import {
 } from '../constants/actionTypes';
 
 const defaultState = {
-  appName: 'Conduit',
+  appName: 'EverydayEnglish',
+  copyRight: 'Copyright © 2019',
   token: null,
   viewChangeCounter: 0
 };
